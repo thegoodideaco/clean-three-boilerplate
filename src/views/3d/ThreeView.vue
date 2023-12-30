@@ -78,17 +78,19 @@ export default {
         renderer.render(scene, camera)
       }
 
-      Object.assign(window, {
-        app: {
-          scene,
-          camera,
-          renderer,
-          mesh,
-          light,
-          animate,
-          controls
-        }
-      })
+      if (import.meta.env.DEV) {
+        Object.assign(window, {
+          app: {
+            scene,
+            camera,
+            renderer,
+            mesh,
+            light,
+            animate,
+            controls
+          }
+        })
+      }
 
       animate()
 

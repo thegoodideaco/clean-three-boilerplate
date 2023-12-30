@@ -1,8 +1,8 @@
+import type { Camera, WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/examples/jsm/Addons.js'
-import * as THREE from 'three'
 
 export class MyControls extends OrbitControls {
-  constructor(camera: THREE.Camera, renderer: THREE.WebGLRenderer) {
+  constructor(camera: Camera, renderer: WebGLRenderer) {
     super(camera, renderer.domElement)
 
     this.enableDamping = true

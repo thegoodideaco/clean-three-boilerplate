@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Clock, DoubleSide, MeshPhongMaterial, ShaderMaterial } from 'three'
 
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
@@ -9,9 +9,17 @@ console.log({
   fragmentShader
 })
 
-const clock = new THREE.Clock()
+if (import.meta.env.DEV) {
+  const backupMaterial = new MeshPhongMaterial()
 
-export class MyShaderMaterial extends THREE.ShaderMaterial {
+  Object.assign(window, {
+    backupMaterial
+  })
+}
+
+const clock = new Clock()
+
+export class MyShaderMaterial extends ShaderMaterial {
   constructor() {
     const uniforms = {
       uTime: {
@@ -27,7 +35,7 @@ export class MyShaderMaterial extends THREE.ShaderMaterial {
       fragmentShader,
       uniforms,
       transparent: true,
-      side: THREE.DoubleSide
+      side: DoubleSide
     })
 
     if (import.meta.env.DEV) {
@@ -41,7 +49,7 @@ export class MyShaderMaterial extends THREE.ShaderMaterial {
 
       pane.addBinding(this.uniforms.uScale, 'value', {
         min: 1,
-        max: 10,
+        max: 100,
         label: 'Time Scale'
       })
     }
