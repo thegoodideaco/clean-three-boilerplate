@@ -15,6 +15,12 @@ if (import.meta.env.DEV) {
   Object.assign(window, {
     backupMaterial
   })
+
+  import('three').then((three) => {
+    Object.assign(window, {
+      THREE: three
+    })
+  })
 }
 
 const clock = new Clock()

@@ -13,5 +13,5 @@ void main() {
 
     float alpha = smoothstep(.1, .7, 1. - pow(abs(p.xy * -.5).y, 1.));
 
-    gl_FragColor = vec4((vUv.xy + p.yz * n) * .5, 1., alpha);
+    gl_FragColor = vec4((vUv.xy) * .5, n, alpha);
 }
