@@ -13,8 +13,8 @@ import {
   PerspectiveCamera,
   PointLight,
   Scene,
-  WebGLRenderer,
-  Clock
+  WebGLRenderer
+  // Clock
 } from 'three'
 import { ref, onMounted, type Ref } from 'vue'
 import { MyShaderMaterial } from './MYShaderMaterial'
@@ -31,7 +31,8 @@ export default {
       const renderer = new WebGLRenderer({
         canvas,
         antialias: true,
-        alpha: true
+        alpha: true,
+        precision: 'highp'
       })
 
       renderer.setSize(window.innerWidth, window.innerHeight)
@@ -69,12 +70,12 @@ export default {
       scene.add(light)
 
       camera.position.z = 2
-      const c = new Clock()
+      // const c = new Clock()
 
       const animate = () => {
-        const delta = c.getDelta()
+        // const delta = c.getDelta()
         requestAnimationFrame(animate)
-        controls.update(delta)
+        controls.update()
         renderer.render(scene, camera)
       }
 

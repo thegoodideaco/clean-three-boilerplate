@@ -23,16 +23,22 @@ if (import.meta.env.DEV) {
   })
 }
 
-const clock = new Clock()
-
 export class MyShaderMaterial extends ShaderMaterial {
+  clock: Clock = new Clock()
+
   constructor() {
     const uniforms = {
       uTime: {
-        value: clock.getElapsedTime()
+        value: 0.1
       },
       uScale: {
-        value: 1
+        value: 7
+      },
+      uThreshold: {
+        value: 0.47
+      },
+      uRealTime: {
+        value: 0
       }
     }
 
@@ -41,7 +47,8 @@ export class MyShaderMaterial extends ShaderMaterial {
       fragmentShader,
       uniforms,
       transparent: true,
-      side: DoubleSide
+      side: DoubleSide,
+      forceSinglePass: false
     })
 
     if (import.meta.env.DEV) {
@@ -58,11 +65,17 @@ export class MyShaderMaterial extends ShaderMaterial {
         max: 100,
         label: 'Time Scale'
       })
+
+      pane.addBinding(this.uniforms.uThreshold, 'value', {
+        min: 0,
+        max: 1,
+        label: 'Threshold'
+      })
     }
   }
 
   onBeforeRender() {
-    // this.uniforms.uTime.value = clock.getElapsedTime()
+    this.uniforms.uRealTime.value = this.clock.getElapsedTime()
     // console.log(this.uniforms.uTime.value)
   }
 }
