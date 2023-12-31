@@ -22,5 +22,5 @@ void main() {
     if(alpha == 0.)
         discard;
 
-    gl_FragColor = vec4((vUv.xy) * .5, dot(p.x, p.y), alpha);
+    gl_FragColor = vec4(normalize(.5 - vPos) + .5, alpha);
 }
