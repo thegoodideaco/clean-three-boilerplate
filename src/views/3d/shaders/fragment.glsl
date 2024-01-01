@@ -1,5 +1,4 @@
 #pragma glslify: cnoise = require('glsl-noise/classic/3d')
-#pragma glslify: v4noise = require('glsl-noise/classic/4d')
 
 precision mediump float;
 varying vec3 vPos;
@@ -12,9 +11,9 @@ uniform float uRealTime;
 
 void main() {
     float n = cnoise(vec3(vUv.xy, 1.) * (uTime * uScale));
-    float n2 = v4noise(vec4(vec3(vUv.xy, 1.) * (mod(uTime * uScale, 1.)), uRealTime * uScale));
+
     vec3 p = (vPos * uScale);
-    p.y += uRealTime * uTime * uScale;
+    p.y += uRealTime * uScale;
     n = cnoise(p);
 
     float alpha = smoothstep(uThreshold, n, 1. - n);
