@@ -16,7 +16,7 @@ import {
   WebGLRenderer
   // Clock
 } from 'three'
-import { ref, onMounted, type Ref } from 'vue'
+import { ref, onMounted, onUnmounted, type Ref } from 'vue'
 import { MyShaderMaterial } from './MYShaderMaterial'
 import { MyControls } from './MyControls'
 
@@ -25,6 +25,7 @@ export default {
     const canvasEl: Ref<HTMLCanvasElement | null> = ref(null)
 
     onMounted(() => {
+      let _disposed = false
       const canvas = canvasEl.value
       if (!canvas) return
 
@@ -53,7 +54,7 @@ export default {
       mesh.material = mat
 
       mesh.onBeforeRender = () => {
-        mesh.rotation.x += 0.001
+        mesh.rotation.x += 0.00001
         mesh.rotation.y += 0.001
       }
 
@@ -73,6 +74,7 @@ export default {
       // const c = new Clock()
 
       const animate = () => {
+        if (_disposed) return
         // const delta = c.getDelta()
         requestAnimationFrame(animate)
         controls.update()
@@ -95,13 +97,24 @@ export default {
 
       animate()
 
-      window.addEventListener('resize', () => {
+      const onResize = () => {
         const width = window.innerWidth
         const height = window.innerHeight
 
         renderer.setSize(width, height)
         camera.aspect = width / height
         camera.updateProjectionMatrix()
+      }
+
+      window.addEventListener('resize', onResize)
+
+      onUnmounted(() => {
+        _disposed = true
+        mat.dispose()
+        renderer.dispose()
+        scene.clear()
+        controls.dispose()
+        window.removeEventListener('resize', onResize)
       })
     })
 

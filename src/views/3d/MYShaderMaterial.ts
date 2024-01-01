@@ -25,6 +25,7 @@ if (import.meta.env.DEV) {
 
 export class MyShaderMaterial extends ShaderMaterial {
   clock: Clock = new Clock()
+  pane?: MyShaderPane
 
   constructor() {
     const uniforms = {
@@ -71,12 +72,22 @@ export class MyShaderMaterial extends ShaderMaterial {
         max: 1,
         label: 'Threshold'
       })
+
+      this.pane = pane
     }
   }
 
   onBeforeRender() {
     this.uniforms.uRealTime.value = this.clock.getElapsedTime()
     // console.log(this.uniforms.uTime.value)
+  }
+
+  dispose(): void {
+    if (this.pane) {
+      this.pane.dispose()
+    }
+
+    super.dispose()
   }
 }
 
