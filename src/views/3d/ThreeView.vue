@@ -16,9 +16,10 @@ import {
   WebGLRenderer
   // Clock
 } from 'three'
-import { ref, onMounted, onUnmounted, type Ref } from 'vue'
+import { ref, onMounted, onUnmounted, type Ref, reactive } from 'vue'
 import { MyShaderMaterial } from './MYShaderMaterial'
 import { MyControls } from './MyControls'
+import { useViewInfo } from './hooks/useViewProp'
 
 export default {
   setup() {
@@ -118,8 +119,11 @@ export default {
       })
     })
 
+    const viewProps = useViewInfo()
+
     return {
-      canvasEl
+      canvasEl,
+      viewProps
     }
   }
 }

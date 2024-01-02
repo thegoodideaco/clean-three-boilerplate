@@ -12,3 +12,10 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
+
+if (import.meta.env.DEV) {
+  import('./dev').then((data) => {
+    //@ts-ignore
+    window.dev = data?.default ?? data
+  })
+}

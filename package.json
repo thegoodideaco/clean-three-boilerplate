@@ -16,6 +16,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vueuse/core": "^10.7.1",
     "d3": "^7.8.5",
     "glsl-noise": "^0.0.0",
     "lodash": "^4.17.21",
