@@ -15,7 +15,7 @@
     "composite": true,
     "noEmit": true,
     "baseUrl": ".",
-    "target": "ES5",
+    "target": "ES2016",
     "allowJs": true,
     "checkJs": false,
     "resolveJsonModule": true,

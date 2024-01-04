@@ -1,4 +1,4 @@
-import { useDocumentVisibility, usePointer, useWindowFocus, useWindowSize } from '@vueuse/core'
+import { useDocumentVisibility, useWindowFocus, useWindowSize } from '@vueuse/core'
 import { useMouse } from '@vueuse/core/index.cjs'
 import { computed } from 'vue'
 /**

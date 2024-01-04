@@ -1,7 +1,7 @@
-import { Clock, DoubleSide, MeshPhongMaterial, ShaderMaterial } from 'three'
+import { Clock, DoubleSide, FrontSide, MeshPhongMaterial, ShaderMaterial } from 'three'
 
-import vertexShader from './shaders/vertex.glsl'
-import fragmentShader from './shaders/fragment.glsl'
+import vertexShader from './shaders/normalVert.vert'
+import fragmentShader from './shaders/normalFrag.frag'
 import { Pane } from 'tweakpane'
 
 console.log({
@@ -29,16 +29,75 @@ export class MyShaderMaterial extends ShaderMaterial {
 
   constructor() {
     const uniforms = {
+      diffuse: {
+        value: 16777215
+      },
+      opacity: {
+        value: 1
+      },
+      map: {
+        value: null
+      },
+      mapTransform: {
+        value: {
+          elements: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+        }
+      },
+      alphaMap: {
+        value: null
+      },
+      alphaMapTransform: {
+        value: {
+          elements: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+        }
+      },
+      alphaTest: {
+        value: 0
+      },
+      bumpMap: {
+        value: null
+      },
+      bumpMapTransform: {
+        value: {
+          elements: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+        }
+      },
+      bumpScale: {
+        value: 1
+      },
+      normalMap: {
+        value: null
+      },
+      normalMapTransform: {
+        value: {
+          elements: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+        }
+      },
+      normalScale: {
+        value: {
+          x: 1,
+          y: 1
+        }
+      },
+      displacementMap: {
+        value: null
+      },
+      displacementMapTransform: {
+        value: {
+          elements: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+        }
+      },
+      displacementScale: {
+        value: 1
+      },
+      displacementBias: {
+        value: 0
+      },
+      clippingPlanes: {
+        value: null,
+        needsUpdate: false
+      },
       uTime: {
-        value: 0.1
-      },
-      uScale: {
-        value: 7
-      },
-      uThreshold: {
-        value: 0.47
-      },
-      uRealTime: {
         value: 0
       }
     }
@@ -48,37 +107,19 @@ export class MyShaderMaterial extends ShaderMaterial {
       fragmentShader,
       uniforms,
       transparent: true,
-      side: DoubleSide,
+      side: FrontSide,
       forceSinglePass: false
     })
 
     if (import.meta.env.DEV) {
       const pane = new MyShaderPane(this)
 
-      pane.addBinding(this.uniforms.uTime, 'value', {
-        min: 0,
-        max: 1,
-        label: 'Time'
-      })
-
-      pane.addBinding(this.uniforms.uScale, 'value', {
-        min: 1,
-        max: 100,
-        label: 'Time Scale'
-      })
-
-      pane.addBinding(this.uniforms.uThreshold, 'value', {
-        min: 0,
-        max: 1,
-        label: 'Threshold'
-      })
-
       this.pane = pane
     }
   }
 
   onBeforeRender() {
-    this.uniforms.uRealTime.value = this.clock.getElapsedTime()
+    this.uniforms.uTime.value = this.clock.getElapsedTime()
     // console.log(this.uniforms.uTime.value)
   }
 
@@ -95,7 +136,8 @@ export class MyShaderPane extends Pane {
   constructor(material: MyShaderMaterial) {
     super({
       title: 'Shader',
-      expanded: false
+      expanded: true
+      // container: document.body
     })
 
     console.log(material)

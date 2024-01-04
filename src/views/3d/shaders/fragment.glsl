@@ -13,7 +13,7 @@ void main() {
     float n = cnoise(vec3(vUv.xy, 1.) * (uTime * uScale));
 
     vec3 p = (vPos * uScale);
-    p.y += uRealTime * uScale;
+    p.y += uRealTime * (uTime * uScale);
     n = cnoise(p);
 
     float alpha = smoothstep(uThreshold, n, 1. - n);

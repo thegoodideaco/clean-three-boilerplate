@@ -7,19 +7,25 @@
 <script lang="ts">
 import {
   BoxGeometry,
+  Color,
+  Material,
   // Color,
   Mesh,
   MeshBasicMaterial,
+  MeshNormalMaterial,
+  MeshPhongMaterial,
+  MeshStandardMaterial,
   PerspectiveCamera,
   PointLight,
   Scene,
   WebGLRenderer
   // Clock
 } from 'three'
-import { ref, onMounted, onUnmounted, type Ref, reactive } from 'vue'
+import { ref, onMounted, onUnmounted, type Ref } from 'vue'
 import { MyShaderMaterial } from './MYShaderMaterial'
 import { MyControls } from './MyControls'
 import { useViewInfo } from './hooks/useViewProp'
+import { extendMaterial, CustomMaterial } from 'three-extend-material'
 
 export default {
   setup() {
@@ -46,7 +52,7 @@ export default {
 
       const scene = new Scene()
 
-      const geometry = new BoxGeometry()
+      const geometry = new BoxGeometry(1, 1, 1, 20, 20, 20)
 
       const mesh = new Mesh(geometry)
 
@@ -55,8 +61,9 @@ export default {
       mesh.material = mat
 
       mesh.onBeforeRender = () => {
-        mesh.rotation.x += 0.00001
-        mesh.rotation.y += 0.001
+        mesh.material
+        // mesh.rotation.x += 0.00001
+        // mesh.rotation.y += 0.001
       }
 
       if (mesh.material instanceof MeshBasicMaterial) {
@@ -66,10 +73,10 @@ export default {
 
       const controls = new MyControls(camera, renderer)
 
-      scene.add(mesh)
+      scene.add(mesh, camera)
 
-      const light = new PointLight(0xffffff, 1, 1000)
-      scene.add(light)
+      const light = new PointLight(0xffffff, 3)
+      camera.add(light)
 
       camera.position.z = 2
       // const c = new Clock()
