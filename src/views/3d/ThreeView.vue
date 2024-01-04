@@ -7,14 +7,9 @@
 <script lang="ts">
 import {
   BoxGeometry,
-  Color,
-  Material,
   // Color,
   Mesh,
   MeshBasicMaterial,
-  MeshNormalMaterial,
-  MeshPhongMaterial,
-  MeshStandardMaterial,
   PerspectiveCamera,
   PointLight,
   Scene,
@@ -25,7 +20,6 @@ import { ref, onMounted, onUnmounted, type Ref } from 'vue'
 import { MyShaderMaterial } from './MYShaderMaterial'
 import { MyControls } from './MyControls'
 import { useViewInfo } from './hooks/useViewProp'
-import { extendMaterial, CustomMaterial } from 'three-extend-material'
 
 export default {
   setup() {

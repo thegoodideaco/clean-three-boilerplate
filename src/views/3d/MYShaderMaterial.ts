@@ -1,4 +1,4 @@
-import { Clock, DoubleSide, FrontSide, MeshPhongMaterial, ShaderMaterial } from 'three'
+import { Clock, FrontSide, MeshPhongMaterial, ShaderMaterial } from 'three'
 
 import vertexShader from './shaders/normalVert.vert'
 import fragmentShader from './shaders/normalFrag.frag'
