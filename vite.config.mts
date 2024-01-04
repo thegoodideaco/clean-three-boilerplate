@@ -15,14 +15,6 @@ export default defineConfig({
       include: [/\.glsl$/, /\.vs$/, /\.fs$/, /\.vert$/, /\.frag$/, /\.glslify$/, /\.glslx$/]
     })
   ],
-  build: {
-    target: 'es2015',
-    lib: {
-      entry: 'src/index.ts',
-      name: 'Vue3D',
-      formats: ['umd']
-    }
-  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
