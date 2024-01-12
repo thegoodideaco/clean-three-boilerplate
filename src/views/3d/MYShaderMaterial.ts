@@ -4,30 +4,30 @@ import vertexShader from './shaders/normalVert.vert'
 import fragmentShader from './shaders/normalFrag.frag'
 import { Pane } from 'tweakpane'
 
-console.log({
-  vertexShader,
-  fragmentShader
-})
-
-if (import.meta.env.DEV) {
-  const backupMaterial = new MeshPhongMaterial()
-
-  Object.assign(window, {
-    backupMaterial
-  })
-
-  import('three').then((three) => {
-    Object.assign(window, {
-      THREE: three
-    })
-  })
-}
-
 export class MyShaderMaterial extends ShaderMaterial {
   clock: Clock = new Clock()
   pane?: MyShaderPane
 
   constructor() {
+    console.log({
+      vertexShader,
+      fragmentShader
+    })
+
+    if (import.meta.env.DEV) {
+      const backupMaterial = new MeshPhongMaterial()
+
+      Object.assign(window, {
+        backupMaterial
+      })
+
+      import('three').then((three) => {
+        Object.assign(window, {
+          THREE: three
+        })
+      })
+    }
+
     const uniforms = {
       diffuse: {
         value: 16777215

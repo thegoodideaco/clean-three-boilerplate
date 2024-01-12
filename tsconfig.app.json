@@ -21,7 +21,6 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    ,
     "allowImportingTsExtensions": true,
     "paths": {
       "@/*": [

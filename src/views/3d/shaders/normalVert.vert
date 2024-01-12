@@ -32,7 +32,7 @@ void main() {
 	#include <skinning_vertex>
 	#include <displacementmap_vertex>
 
-	float nx = cnoise(vec3(transformed) + (uTime * .6)) * 1.5;
+	float nx = cnoise(vec3(transformed * 1.5) + (uTime * .006) * 6.);
 	float ny = cnoise(vec3(transformed.yyy) + (uTime * .1));
 	float nz = cnoise(vec3(transformed.zzz) + (uTime * .1));
 

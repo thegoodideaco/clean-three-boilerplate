@@ -20,6 +20,8 @@ import { ref, onMounted, onUnmounted, type Ref } from 'vue'
 import { MyShaderMaterial } from './MYShaderMaterial'
 import { MyControls } from './MyControls'
 import { useViewInfo } from './hooks/useViewProp'
+import { MyCustomStandardMaterial } from './MyCustomStandardMaterial'
+import { useRapier } from './hooks/useRapier'
 
 export default {
   setup() {
@@ -54,11 +56,7 @@ export default {
 
       mesh.material = mat
 
-      mesh.onBeforeRender = () => {
-        mesh.material
-        // mesh.rotation.x += 0.00001
-        // mesh.rotation.y += 0.001
-      }
+      mesh.material = new MyCustomStandardMaterial()
 
       if (mesh.material instanceof MeshBasicMaterial) {
         // mesh.material.color = new Color(0x00ff00)
@@ -75,10 +73,15 @@ export default {
       camera.position.z = 2
       // const c = new Clock()
 
+      const physics = useRapier()
+      // const { world, rigidBody } = physics
+
       const animate = () => {
         if (_disposed) return
         // const delta = c.getDelta()
         requestAnimationFrame(animate)
+        // world.step()
+        // mesh.position.copy(rigidBody.translation() as any)
         controls.update()
         renderer.render(scene, camera)
       }
@@ -92,7 +95,8 @@ export default {
             mesh,
             light,
             animate,
-            controls
+            controls,
+            physics
           }
         })
       }

@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/vue3'
+import dev from './dev'
 
 const preview: Preview = {
   parameters: {
@@ -13,3 +14,7 @@ const preview: Preview = {
 }
 
 export default preview
+
+Object.assign(window, {
+  dev
+})

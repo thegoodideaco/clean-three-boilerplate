@@ -80,9 +80,9 @@ varying vec3 vViewPosition;
 #include <clipping_planes_pars_fragment>
 void main() {
 	#include <clipping_planes_fragment>
-    vec4 diffuseColor = vec4(diffuse, opacity);
-    ReflectedLight reflectedLight = ReflectedLight(vec3(0.0), vec3(0.0), vec3(0.0), vec3(0.0));
-    vec3 totalEmissiveRadiance = emissive;
+	vec4 diffuseColor = vec4(diffuse, opacity);
+	ReflectedLight reflectedLight = ReflectedLight(vec3(0.0), vec3(0.0), vec3(0.0), vec3(0.0));
+	vec3 totalEmissiveRadiance = emissive;
 	#include <logdepthbuf_fragment>
 	#include <map_fragment>
 	#include <color_fragment>
@@ -101,18 +101,18 @@ void main() {
 	#include <lights_fragment_maps>
 	#include <lights_fragment_end>
 	#include <aomap_fragment>
-    vec3 totalDiffuse = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse;
-    vec3 totalSpecular = reflectedLight.directSpecular + reflectedLight.indirectSpecular;
+	vec3 totalDiffuse = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse;
+	vec3 totalSpecular = reflectedLight.directSpecular + reflectedLight.indirectSpecular;
 	#include <transmission_fragment>
-    vec3 outgoingLight = totalDiffuse + totalSpecular + totalEmissiveRadiance;
+	vec3 outgoingLight = totalDiffuse + totalSpecular + totalEmissiveRadiance;
 	#ifdef USE_SHEEN
-    float sheenEnergyComp = 1.0 - 0.157 * max3(material.sheenColor);
-    outgoingLight = outgoingLight * sheenEnergyComp + sheenSpecularDirect + sheenSpecularIndirect;
+	float sheenEnergyComp = 1.0 - 0.157 * max3(material.sheenColor);
+	outgoingLight = outgoingLight * sheenEnergyComp + sheenSpecularDirect + sheenSpecularIndirect;
 	#endif
 	#ifdef USE_CLEARCOAT
-    float dotNVcc = saturate(dot(geometryClearcoatNormal, geometryViewDir));
-    vec3 Fcc = F_Schlick(material.clearcoatF0, material.clearcoatF90, dotNVcc);
-    outgoingLight = outgoingLight * (1.0 - material.clearcoat * Fcc) + (clearcoatSpecularDirect + clearcoatSpecularIndirect) * material.clearcoat;
+	float dotNVcc = saturate(dot(geometryClearcoatNormal, geometryViewDir));
+	vec3 Fcc = F_Schlick(material.clearcoatF0, material.clearcoatF90, dotNVcc);
+	outgoingLight = outgoingLight * (1.0 - material.clearcoat * Fcc) + (clearcoatSpecularDirect + clearcoatSpecularIndirect) * material.clearcoat;
 	#endif
 	#include <opaque_fragment>
 	#include <tonemapping_fragment>
