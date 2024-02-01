@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: '/',
       name: '3d',
-      component: () => import('@/views/3d/ThreeView.vue')
+      component: () => import('@/views/3d/rapier_setup/RapierView.vue')
     },
     {
       path: '/about',

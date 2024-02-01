@@ -5,6 +5,6 @@ export class MyControls extends OrbitControls {
   constructor(camera: Camera, renderer: WebGLRenderer) {
     super(camera, renderer.domElement)
 
-    this.enableDamping = true
+    this.enableDamping = false
   }
 }

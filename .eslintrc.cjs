@@ -10,6 +10,12 @@ module.exports = {
     "@vue/eslint-config-prettier/skip-formatting",
     "plugin:storybook/recommended"
   ],
+  "rules": {
+    // Note: you must disable the base rule as it can report incorrect errors
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "object-shorthand": ["error", "always"]
+  },
   overrides: [
     {
       files: [
@@ -21,7 +27,9 @@ module.exports = {
       ]
     }
   ],
+  
   parserOptions: {
     ecmaVersion: 'latest'
-  }
+  },
+
 }

@@ -1,21 +1,32 @@
+import '@/modules/webfontloader'
+import '@/modules/pinia'
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+import { piniaInstance } from '@/modules/pinia'
 
 const app = createApp(App)
 
-app.use(createPinia())
+app.use(piniaInstance)
 app.use(router)
 
 app.mount('#app')
 
+
 if (import.meta.env.DEV) {
-  import('./dev.ts').then((data) => {
-    //@ts-ignore
-    window.dev = data?.default ?? data
-  })
+  document.addEventListener(
+    'click',
+    () => {
+      import('./dev.ts').then((data) => {
+        //@ts-ignore
+        window.dev = data?.default ?? data
+      })
+    },
+    {
+      once: true
+    }
+  )
 }

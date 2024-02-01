@@ -6,3 +6,6 @@ coverage
 **/*.vert
 **/*.frag
 **/*.glsl
+
+# ignore public dir
+public
