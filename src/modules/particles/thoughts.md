@@ -31,7 +31,7 @@ After each frame, we loop thru the objects pulled from the pool, and put back an
 
 Each 'particle' will consist of a subset of values for each effect that is applied to it.
 
-For example, a particle that is effected by gravity and wind will have `position`, `velocity`, and `acceleration` for __gravity__, and `position`, `velocity`, and `acceleration` for __wind__.
+For example, a particle that is effected by gravity and wind will have `position`, `velocity`, and `acceleration` for **gravity**, and `position`, `velocity`, and `acceleration` for **wind**.
 
 Each effect will transform the particle's state one by one before finally being applied to the main array buffer, and will be applied again at each frame.
 
@@ -39,14 +39,16 @@ In order to do object pooling, we will need to keep track of which particles are
 
 Ultimately we want the particle system at it's core, to handle particles as a single array buffer, and to apply effects to the particles in a generic way that can update the main array buffer without the need to create particles as objects.
 
-The user can then define their own effects, and apply them to the particle system. 
+The user can then define their own effects, and apply them to the particle system.
 
 The particle system should be in charge of:
+
 - timing and speed
 - object pooling
 - applying effects that modify one or more array buffers
 
 The user should be in charge of:
+
 - defining the particle
 - defining the effects
 - defining the array buffer(s) that the effects will be applied to

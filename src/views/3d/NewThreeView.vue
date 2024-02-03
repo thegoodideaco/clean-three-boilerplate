@@ -1,5 +1,5 @@
 <template>
-  <div class="three-view"  ref="containerEl">
+  <div class="three-view" ref="containerEl">
     <!-- app goes here -->
   </div>
 </template>
@@ -21,7 +21,10 @@ export default {
       const app = new ThreeApp(containerEl.value)
       markRaw(app)
 
-      const box = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true }))
+      const box = new THREE.Mesh(
+        new THREE.BoxGeometry(1, 1, 1),
+        new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
+      )
       box.onAfterRender = () => {
         box.rotation.x += 0.01
         box.rotation.y += 0.01

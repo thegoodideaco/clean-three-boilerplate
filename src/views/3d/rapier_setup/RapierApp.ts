@@ -8,20 +8,20 @@ import {
   DirectionalLight,
   SpotLight,
   PointLight, // LightShadow
-  AxesHelper,
-  Vector3
-  // PointLightShadow,
+  AxesHelper, // PointLightShadow,
+  Vector2
   // SpotLightShadow
 } from 'three'
 import { useOrbitControls } from '../hooks/useOrbitControls'
 
-import { shallowRef, toValue, watchEffect } from 'vue'
+import { shallowRef } from 'vue'
 import { AppLoaderManager } from '@/modules/loaders/Manager'
 import { useRaycast } from '../hooks/useRaycast'
 import { useViewInfo } from '../hooks/useViewProp'
 import layerMasks from '@/utils/layer-masks'
 import type { RenderPass } from 'three/examples/jsm/Addons.js'
 import { useBvhRaycasting } from '../hooks/useBvhRaycasting'
+import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js'
 
 loaders.gltf.manager = AppLoaderManager
 
@@ -82,6 +82,14 @@ export class RapierApp extends ThreeApp {
 
     this.orbitControls = orbitControlsRef.value!
     this.orbitControls.screenSpacePanning = true
+
+    /**
+     * Add post processing
+     */
+    const { x: width, y: height } = this.renderer.getSize(new Vector2())
+    this.composer.addPass(new SMAAPass(width, height))
+    const [rp, outPutPass, saPass] = this.composer.passes
+    this.composer.passes = [rp, saPass, outPutPass]
   }
 
   async load() {

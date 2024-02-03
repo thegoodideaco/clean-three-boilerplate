@@ -17,7 +17,6 @@ export function definePool<T>(ctor: T | ((...args: any) => T), size: number = 10
     }
   }
 
-
   function get() {
     const item = create()
     // pool.shift(item)

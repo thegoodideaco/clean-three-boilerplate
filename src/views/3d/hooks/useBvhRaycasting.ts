@@ -4,7 +4,6 @@ import {
   disposeBoundsTree,
   acceleratedRaycast,
   MeshBVHHelper,
-  CENTER,
   SAH
 } from 'three-mesh-bvh'
 import { Scene, Object3D, BufferGeometry, Mesh } from 'three'

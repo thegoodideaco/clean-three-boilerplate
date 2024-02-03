@@ -15,7 +15,6 @@ app.use(router)
 
 app.mount('#app')
 
-
 if (import.meta.env.DEV) {
   document.addEventListener(
     'click',
