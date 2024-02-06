@@ -25,5 +25,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  assetsInclude: [/\.gl(b|tf)$/, /\.hdr$/, '**/*.glb']
+  assetsInclude: [/\.gl(b|tf)$/, /\.hdr$/, '**/*.glb'],
+  css: {
+    devSourcemap: true
+  }
 })
