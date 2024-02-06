@@ -1,4 +1,10 @@
-import { useDocumentVisibility, useWindowFocus, useWindowSize, useMouse } from '@vueuse/core'
+import {
+  useDocumentVisibility,
+  useWindowFocus,
+  useWindowSize,
+  useMouse,
+  useFullscreen
+} from '@vueuse/core'
 import { computed } from 'vue'
 
 /**
@@ -38,6 +44,10 @@ export function useViewInfo() {
    */
   const aspectRatio = computed(() => width.value / height.value)
 
+  const fsState = useFullscreen(null, {
+    autoExit: true
+  })
+
   return {
     documentVisible,
     windowFocused,
@@ -47,6 +57,7 @@ export function useViewInfo() {
     glY,
     width,
     height,
-    aspectRatio
+    aspectRatio,
+    fullscreen: fsState.isFullscreen
   }
 }

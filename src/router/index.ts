@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import('@/views/3d/rapier_setup/RapierView.vue')
     },
     {
+      path: '/hearts',
+      name: 'hearts',
+      component: () => import('@/views/3d/hearts/HeartsView.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

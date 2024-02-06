@@ -50,7 +50,7 @@ export function useBvhRaycasting(target: MaybeRef<Scene | Object3D>) {
   return target
 }
 
-function createBvhHelper(obj: Object3D) {
+function createBvhHelper(obj: Mesh) {
   const bvhHelper = new MeshBVHHelper(obj, 0xff00ff)
   bvhHelper.depth = 20
   bvhHelper.edgeMaterial.color.set('orange')

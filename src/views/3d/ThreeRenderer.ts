@@ -129,7 +129,7 @@ export class ThreeApp {
 
       this.composer = this.#initComposer(this.scene, this.camera)
 
-      const { width, height, aspectRatio } = useViewInfo()
+      const { width, height, aspectRatio, fullscreen } = useViewInfo()
 
       watchEffect(() => {
         this.setSize(width.value, height.value)
@@ -155,7 +155,10 @@ export class ThreeApp {
         setupState: undefined as typeof setupFn | undefined,
         ticker,
         play,
-        pause
+        pause,
+        fullscreen,
+        width,
+        height
       }
 
       if (setupFn) {
