@@ -1,3 +1,5 @@
+import type * as THREE from 'three'
+
 export function calculateCameraDistance(
   planeWidth: number,
   planeHeight: number,

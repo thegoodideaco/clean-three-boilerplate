@@ -45,10 +45,9 @@ export class PaneExtended extends Pane {
 
 export function usePane(pane = PaneExtended.rootPane): PaneExtended {
   onScopeDispose(() => {
-    pane.dispose()
-
     if (pane === _rootPane) {
       _rootPane = undefined
+      pane.dispose()
 
       if (_container) {
         _container.remove()

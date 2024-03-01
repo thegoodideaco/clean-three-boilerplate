@@ -1,7 +1,9 @@
-export class instancedMeshEmitter {
-  instancedMesh: THREE.InstancedMesh
+import type { InstancedMesh } from 'three'
 
-  constructor(mesh: THREE.InstancedMesh) {
+export class instancedMeshEmitter {
+  instancedMesh: InstancedMesh
+
+  constructor(mesh: InstancedMesh) {
     this.instancedMesh = mesh
   }
 }

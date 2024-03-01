@@ -1,6 +1,19 @@
 <template>
-  <div class="hearts-view" ref="containerEl" @dblclick="appRef?.mesh.scatter(100)">
-    <!-- Canvas will go here -->
+  <div class="hearts-container absolute top-0 left-0 w-screen h-screen overflow-hidden">
+    <div class="container-behind absolute top-0 left-0 w-screen h-screen select-none">
+      This gpoes behind the canvas
+    </div>
+    <div
+      v-show="isLoaded"
+      class="hearts-view"
+      ref="containerEl"
+      @dblclick="appRef?.mesh.scatter(100)"
+    >
+      <!-- Canvas will go here -->
+    </div>
+    <div class="container-above absolute top-0 left-0 w-screen h-screen select-none">
+      Hello there
+    </div>
   </div>
 </template>
 
@@ -14,6 +27,8 @@ export default {
 
     const appRef = shallowRef() as Ref<HeartsApp | null>
 
+    const isLoaded = ref(false)
+
     onMounted(async () => {
       const container = containerEl.value
       if (!container) return
@@ -21,6 +36,10 @@ export default {
       const app = new HeartsApp(container)
       markRaw(app)
       appRef.value = app
+
+      app.addEventListener('load', () => {
+        isLoaded.value = true
+      })
 
       if (import.meta.env.DEV) {
         Object.assign(window, {
@@ -31,7 +50,8 @@ export default {
 
     return {
       appRef,
-      containerEl
+      containerEl,
+      isLoaded
     }
   }
 }
@@ -47,11 +67,13 @@ export default {
   height: 100vh;
   overflow: hidden;
 
-  background-image: linear-gradient(to bottom, hsl(256, 68%, 70%) 0%, hsl(256, 80%, 40%) 100%);
-
   :deep(canvas) {
     min-width: 100%;
     min-height: 100%;
   }
+}
+
+.container-behind {
+  background-image: linear-gradient(to bottom, hsl(256, 68%, 70%) 0%, hsl(256, 80%, 40%) 100%);
 }
 </style>

@@ -5,7 +5,9 @@ import {
   Vector2,
   type Object3DEventMap,
   type Intersection,
-  PerspectiveCamera
+  PerspectiveCamera,
+  Camera,
+  Scene
 } from 'three'
 import { toValue, type MaybeRef, computed, reactive, ref, watch, shallowRef } from 'vue'
 
@@ -38,8 +40,8 @@ export interface UseRaycastOptions {
  * @param options
  */
 export function useRaycast(
-  camera: MaybeRef<THREE.Camera>,
-  target: MaybeRef<THREE.Scene | THREE.Object3D>,
+  camera: MaybeRef<Camera>,
+  target: MaybeRef<Scene | Object3D>,
   x: MaybeRef<number>,
   y: MaybeRef<number>,
   options?: UseRaycastOptions

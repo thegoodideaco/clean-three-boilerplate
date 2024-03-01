@@ -5,7 +5,8 @@ import {
   Scene,
   WebGLRenderer,
   type WebGLRendererParameters,
-  WebGLRenderTarget
+  WebGLRenderTarget,
+  EventDispatcher
 } from 'three'
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js'
@@ -18,7 +19,9 @@ import { Ticker } from '@pixi/ticker'
 import { useSharedTickerCallback } from './hooks/useSharedTickerCallback'
 import layerMasks from '@/utils/layer-masks'
 
-export class ThreeApp {
+export class ThreeApp extends EventDispatcher<{
+  load: any
+}> {
   camera!: PerspectiveCamera
   renderer!: WebGLRenderer
   scene!: Scene
@@ -172,6 +175,8 @@ export class ThreeApp {
   }
 
   constructor(container: HTMLElement = document.body, setupFn?: (ctx: ThreeApp) => any) {
+    super()
+
     const {
       renderer: { domElement },
       ticker,

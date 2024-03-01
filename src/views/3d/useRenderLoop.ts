@@ -1,4 +1,5 @@
 import { useDocumentVisibility } from '@vueuse/core'
+import type { WebGLRenderer } from 'three'
 import { onScopeDispose, watch } from 'vue'
 
 /**
@@ -10,7 +11,7 @@ import { onScopeDispose, watch } from 'vue'
  */
 
 export function useRenderLoop(
-  renderer: THREE.WebGLRenderer,
+  renderer: WebGLRenderer,
   renderFn: XRFrameRequestCallback,
   autoStart = false
 ) {

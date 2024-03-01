@@ -2,6 +2,7 @@ import { UPDATE_PRIORITY } from '@pixi/core'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { useSharedTickerCallback } from './useSharedTickerCallback'
 import { onScopeDispose } from 'vue'
+import type { Camera } from 'three'
 
 /**
  * A hook to create and update OrbitControls
@@ -11,7 +12,7 @@ import { onScopeDispose } from 'vue'
  *
  * @returns The OrbitControls instance
  */
-export function useOrbitControls(camera: THREE.Camera, element: HTMLElement = document.body) {
+export function useOrbitControls(camera: Camera, element: HTMLElement = document.body) {
   const controls = new OrbitControls(camera, element)
   controls.enableDamping = true
 

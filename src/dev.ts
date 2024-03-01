@@ -19,15 +19,17 @@ import * as cameraFitting from './utils/cameraFitting'
 import gsap from 'gsap'
 
 import * as environmentLoader from './modules/loaders/environmentLoader'
+import * as imgLoader from './modules/loaders/imgLoader'
+import * as lutLoader from './modules/loaders/LutLoader'
 import { exportGlb } from './modules/exporting/gltfExport'
 import { definePool } from './modules/particles/ObjectPool'
-
-globalThis.THREE = THREE
+;(window as any).THREE = THREE as unknown as typeof THREE
 //@ts-expect-error
 import * as threeMeshLine from 'three.meshline/src/THREE.MeshLine.js'
 import { loopThruBufferAttribute } from './utils/loopThruBufferAttribute'
 import { ParticleEmitter } from './modules/particles/ParticleEmitter'
 import { useBvhRaycasting } from './views/3d/hooks/useBvhRaycasting'
+import { glbLoader } from './modules/loaders/gltfLoader'
 
 // delete window.THREE
 
@@ -54,6 +56,9 @@ export default {
   cameraFitting,
   gsap,
   environmentLoader,
+  imgLoader,
+  glbLoader,
+  lutLoader,
   exportGlb,
   definePool,
   threeMeshLine,

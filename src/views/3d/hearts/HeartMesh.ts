@@ -5,7 +5,7 @@ import {
   InstancedBufferAttribute,
   InstancedMesh,
   MathUtils,
-  Matrix4,
+  Mesh,
   MeshPhysicalMaterial,
   Object3D,
   Vector3
@@ -29,8 +29,8 @@ export class HeartMesh extends InstancedMesh {
   constructor(amount: number = 1000) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const material = new MeshPhysicalMaterial({
-      metalness: 0.0,
-      roughness: 0.5,
+      metalness: 0,
+      roughness: 0.2,
       sheenColor: new Color(0xff0000)
     })
 
@@ -56,7 +56,7 @@ export class HeartMesh extends InstancedMesh {
     // this.material.wireframe = true
 
     glbLoader.load(heartGlb, (gltf) => {
-      const geom = (gltf.scene.getObjectByProperty('isMesh', true) as THREE.Mesh)?.geometry
+      const geom = (gltf.scene.getObjectByProperty('isMesh', true) as Mesh)?.geometry
 
       if (geom) {
         const _scale = 0.25
@@ -91,6 +91,8 @@ export class HeartMesh extends InstancedMesh {
    * - angular velocity
    */
   tick() {
+    const stepTime = (this.ticker.deltaMS / 1000) * this.ticker.speed
+    if (this.ticker.speed === 0) return
     for (let i = 0; i < this.count; i++) {
       // copy the current matrix iterated into our dummy
       this.dummy.matrix
@@ -112,19 +114,17 @@ export class HeartMesh extends InstancedMesh {
         .setFromEuler(this.velocityDummy.rotation)
         .multiplyScalar(this.ticker.speed)
 
-      this.dummy.rotation.x += this.rotationAxisVector.x
-      this.dummy.rotation.y += this.rotationAxisVector.y
-      this.dummy.rotation.z += this.rotationAxisVector.z
+      this.dummy.rotation.setFromVector3(this.rotationAxisVector)
 
       // get the rotation as Euler angles and place within the dummy vec3
 
-      this.dummy.position.add(this.velocityDummy.position)
+      // this.dummy.position.add(this.velocityDummy.position.normalize())
 
       // this.dummy.quaternion.multiply(this.velocityDummy.quaternion)
-      // this.dummy.position.y += 2.5 * (this.ticker.deltaMS / 1000)
+      this.dummy.position.y += (0.0015 + i) * 0.01 * stepTime
 
-      if (this.dummy.position.y > 50) {
-        this.dummy.position.y -= 100
+      if (this.dummy.position.y > 150) {
+        this.dummy.position.y -= 300
       }
 
       this.dummy.updateMatrix()
@@ -132,14 +132,17 @@ export class HeartMesh extends InstancedMesh {
     }
 
     this.instanceMatrix.needsUpdate = true
+    this.rotateY(0.05 * stepTime)
   }
 
-  scatter(size: number = 100) {
+  scatter(sizeX: number = 100, sizeY: number = sizeX, sizeZ: number = sizeX) {
     for (let i = 0; i < this.count; i++) {
-      const [rx, ry] = Array.from({ length: 2 }, () => MathUtils.randFloatSpread(size))
+      const rx = MathUtils.randFloatSpread(sizeX)
+      const ry = MathUtils.randFloatSpread(sizeY)
+      const rz = MathUtils.randFloatSpread(sizeZ)
 
       const rScale = Math.random() * 10
-      const rz = Math.random() * 10
+      // const rz = Math.random() * 10
 
       this.dummy.position.set(rx, ry, rz)
       this.dummy.rotation.set(
@@ -161,9 +164,9 @@ export class HeartMesh extends InstancedMesh {
 
   resetVelocityTransforms() {
     const mat = this.velocityDummy.matrix
-    const maxRotation = 4 * DEG2RAD
+    const maxRotation = 400 * DEG2RAD
     for (let i = 0; i < this.count; i++) {
-      mat.makeTranslation(0, Math.random() * 5, 0)
+      // mat.makeTranslation(0, Math.random() * 5, 0)
 
       mat.decompose(
         this.velocityDummy.position,

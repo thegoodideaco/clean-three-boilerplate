@@ -10,7 +10,8 @@ const dataWorker = new DataWorker()
 export const hdrPaths = Object.values(
   import.meta.glob(['/src/**/*.hdr', '/src/**/**/*.hdr'], {
     eager: true,
-    as: 'url'
+    query: '?url',
+    import: 'default'
   })
 ) as string[]
 

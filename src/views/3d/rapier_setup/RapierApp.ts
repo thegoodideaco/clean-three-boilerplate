@@ -9,6 +9,8 @@ import {
   SpotLight,
   PointLight, // LightShadow
   AxesHelper, // PointLightShadow,
+  // Vector2,
+  PerspectiveCamera,
   Vector2
   // SpotLightShadow
 } from 'three'
@@ -148,7 +150,7 @@ export class RapierApp extends ThreeApp {
     this.scene.add(root)
 
     const _camera = (cameras[0] || this.scene.getObjectByProperty('isCamera', true)) as
-      | THREE.PerspectiveCamera
+      | PerspectiveCamera
       | undefined
     if (_camera) {
       _camera.aspect = window.innerWidth / window.innerHeight

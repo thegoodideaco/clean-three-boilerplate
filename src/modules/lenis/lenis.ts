@@ -4,6 +4,8 @@
  *
  */
 
+//@ts-nocheck
+
 import Lenis from '@studio-freight/lenis'
 import './lenis.css'
 import * as THREE from 'three'

@@ -2,11 +2,13 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
     "env.d.ts",
+    "src/*.ts",
     "src/**/*",
     "src/**/*.vue",
     "src/**/**/*.vue",
     "src/**/*.ts",
     "src/**/**/*.ts",
+    "node_modules/@types/*",
   ],
   "exclude": [
     "src/**/__tests__/*"
@@ -15,21 +17,20 @@
     "composite": true,
     "noEmit": true,
     "baseUrl": ".",
-    "target": "ES2016",
+    // "target": "ES2016",
     "allowJs": true,
     "checkJs": false,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    // "emitDecoratorMetadata": true,
     "allowImportingTsExtensions": true,
+    // "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
-    "types": [
-      "three",
-      "vue",
-    ]
   }
 }
