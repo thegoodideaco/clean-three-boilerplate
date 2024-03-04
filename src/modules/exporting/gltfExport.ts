@@ -1,5 +1,6 @@
 import type { Scene } from 'three'
 import { GLTFExporter } from 'three/examples/jsm/Addons.js'
+import { downloadFile } from '.'
 
 const exporter = new GLTFExporter()
 
@@ -9,15 +10,9 @@ export async function exportGlb(scene: Scene, name: string = scene.name || scene
     includeCustomExtensions: true
   })) as ArrayBuffer
 
-  const blob = new Blob([gltf], { type: 'application/octet-stream' })
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.style.display = 'none'
-  link.href = url
-  link.download = name + '.glb'
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
+  name = name.endsWith('.glb') ? name : `${name}.glb`
+
+  downloadFile(gltf, name, 'model/gltf-binary')
 
   return gltf
 }
