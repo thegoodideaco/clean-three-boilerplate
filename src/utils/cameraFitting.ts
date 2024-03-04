@@ -1,9 +1,9 @@
-import type * as THREE from 'three'
+import type { PerspectiveCamera } from 'three'
 
 export function calculateCameraDistance(
   planeWidth: number,
   planeHeight: number,
-  camera: THREE.PerspectiveCamera,
+  camera: PerspectiveCamera,
   fitOutside: boolean
 ): number {
   const fov = camera.fov * (Math.PI / 180)
@@ -17,7 +17,7 @@ export function calculateCameraDistance(
 
 export function getPixelScaleFromCameraDistance(
   cameraDistance: number,
-  camera: THREE.PerspectiveCamera
+  camera: PerspectiveCamera
 ): number {
   const fov = camera.fov * (Math.PI / 180)
   const fovh = 2 * Math.atan(Math.tan(fov / 2) * camera.aspect)

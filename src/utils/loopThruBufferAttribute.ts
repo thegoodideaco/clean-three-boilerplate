@@ -1,4 +1,4 @@
-import { Matrix4, type BufferAttribute } from 'three'
+import { type BufferAttribute } from 'three'
 
 /**
  * Utility function to loop through a BufferAttribute

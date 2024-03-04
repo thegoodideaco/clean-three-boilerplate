@@ -4,19 +4,17 @@
  *
  */
 
-//@ts-nocheck
-
 import Lenis from '@studio-freight/lenis'
 import './lenis.css'
-import * as THREE from 'three'
 import { useRafFn } from '@vueuse/core'
 import { markRaw, onScopeDispose, ref } from 'vue'
+import { MathUtils } from 'three'
 
 export default () => {
   const lenis = new Lenis({
     wrapper: document.body,
     easing(t) {
-      return THREE.MathUtils.smootherstep(t, 0.5, 0.7)
+      return MathUtils.smootherstep(t, 0.5, 0.7)
     },
     infinite: false,
     lerp: 0.1,
@@ -26,7 +24,7 @@ export default () => {
 
   markRaw(lenis)
 
-  const velocity = ref(lenis.velocity)
+  const velocity = ref(lenis.progress)
 
   // lenis.on('scroll', (e: typeof lenis) => {
   //   console.log(e.velocity)
@@ -36,10 +34,7 @@ export default () => {
     ({ timestamp }) => {
       lenis.raf(timestamp)
 
-      // update velocity value
-      if (lenis.velocity !== velocity.value) {
-        velocity.value = lenis.velocity
-      }
+      velocity.value = lenis.progress
     },
     {
       immediate: true

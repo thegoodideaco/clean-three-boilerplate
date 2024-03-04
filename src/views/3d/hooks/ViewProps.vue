@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { watchEffect } from 'vue'
 import { useViewInfo } from './useViewProp'
 

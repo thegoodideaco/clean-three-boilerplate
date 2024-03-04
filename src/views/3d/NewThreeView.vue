@@ -7,7 +7,7 @@
 <script lang="ts">
 import { markRaw, onMounted, ref, type Ref } from 'vue'
 import { ThreeApp } from './ThreeRenderer'
-import * as THREE from 'three'
+import { Mesh, BoxGeometry, MeshBasicMaterial } from 'three'
 
 export default {
   setup() {
@@ -21,9 +21,9 @@ export default {
       const app = new ThreeApp(containerEl.value)
       markRaw(app)
 
-      const box = new THREE.Mesh(
-        new THREE.BoxGeometry(1, 1, 1),
-        new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
+      const box = new Mesh(
+        new BoxGeometry(1, 1, 1),
+        new MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
       )
       box.onAfterRender = () => {
         box.rotation.x += 0.01
@@ -46,3 +46,5 @@ export default {
   overflow: hidden;
 }
 </style>
+import { Mesh, BoxGeometry, MeshBasicMaterial } from 'three'import { Mesh, BoxGeometry,
+MeshBasicMaterial } from 'three' BoxGeometry, , MeshBasicMaterial

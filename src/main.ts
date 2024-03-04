@@ -19,7 +19,7 @@ if (import.meta.env.DEV) {
   document.addEventListener(
     'click',
     () => {
-      import('./dev.ts').then((data) => {
+      import('./dev').then((data) => {
         //@ts-ignore
         window.dev = data?.default ?? data
       })

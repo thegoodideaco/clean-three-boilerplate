@@ -30,6 +30,7 @@ import { loopThruBufferAttribute } from './utils/loopThruBufferAttribute'
 import { ParticleEmitter } from './modules/particles/ParticleEmitter'
 import { useBvhRaycasting } from './views/3d/hooks/useBvhRaycasting'
 import { glbLoader } from './modules/loaders/gltfLoader'
+import Lenis from '@studio-freight/lenis/types'
 
 // delete window.THREE
 
@@ -65,7 +66,8 @@ export default {
   loopThruBufferAttribute,
   ParticleEmitter,
   ObjectPool: definePool,
-  useBvhRaycasting
+  useBvhRaycasting,
+  Lenis
 }
 
 /**
