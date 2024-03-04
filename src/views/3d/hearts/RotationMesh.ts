@@ -1,5 +1,11 @@
 import { Matrix3 } from 'three'
 
+/**
+ * Create a random transform matrix.
+ *
+ * @param matrix - The matrix to set the random values to. If none is provided, a new matrix will be created.
+ * @returns The matrix with random values.
+ */
 export function createRandomTransformMatrix(matrix = new Matrix3()): Matrix3 {
   // Generate random values for the matrix elements
   const elements = []
