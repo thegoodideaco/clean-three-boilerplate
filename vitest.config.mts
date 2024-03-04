@@ -1,14 +1,17 @@
+/// <reference types="vitest" />
+
 import { fileURLToPath } from 'node:url'
-import { mergeConfig, defineConfig, configDefaults } from 'vitest/config'
+import { defineConfig, configDefaults, mergeConfig } from 'vitest/config'
+import tsconfigPaths from 'vite-tsconfig-paths'
 import viteConfig from './vite.config.mjs'
 
-export default mergeConfig(
-  viteConfig as any,
-  defineConfig({
+export default defineConfig((env) => {
+  return mergeConfig(viteConfig(env), {
+    plugins: [tsconfigPaths()],
     test: {
       environment: 'jsdom',
       exclude: [...configDefaults.exclude, 'e2e/*'],
       root: fileURLToPath(new URL('./', import.meta.url))
     }
   })
-)
+})
